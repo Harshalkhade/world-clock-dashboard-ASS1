@@ -1,0 +1,880 @@
+/* ==========================================================================
+   World Clock Dashboard Pro - Complete Styling System & Dynamic Themes
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
+:root {
+    --brand-600: #4f46e5;
+    --brand-700: #4338ca;
+    --brand-500: #6366f1;
+    --brand-100: #e0e7ff;
+    --accent-rose: #f43f5e;
+    --accent-cyan: #06b6d4;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    
+    --bg-primary: #0f1222;
+    --bg-surface: rgba(26, 30, 52, 0.85);
+    --bg-card: rgba(22, 26, 46, 0.88);
+    --border-color: rgba(148, 163, 184, 0.12);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --shadow-soft: 0 12px 36px -8px rgba(0, 0, 0, 0.45);
+    --shadow-glow: 0 0 24px rgba(79, 70, 229, 0.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   DYNAMIC THEMES
+   ========================================================================== */
+
+/* 1. Deep Space (Dark - Default) */
+.theme-dark-space {
+    --bg-primary: #0a0d1d;
+    --bg-surface: rgba(20, 25, 48, 0.85);
+    --bg-card: rgba(17, 21, 41, 0.9);
+    --border-color: rgba(99, 102, 241, 0.16);
+    --brand-600: #6366f1;
+    --brand-700: #4f46e5;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    background: radial-gradient(circle at 10% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(244, 63, 94, 0.12) 0%, transparent 40%),
+                linear-gradient(180deg, #070a18 0%, #0d1124 100%);
+}
+
+/* 2. Pearl Light */
+.theme-pearl-light {
+    --bg-primary: #f8fafc;
+    --bg-surface: rgba(255, 255, 255, 0.92);
+    --bg-card: rgba(255, 255, 255, 0.96);
+    --border-color: rgba(203, 213, 225, 0.8);
+    --brand-600: #4f46e5;
+    --brand-700: #4338ca;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --shadow-soft: 0 12px 32px -8px rgba(79, 70, 229, 0.12);
+    background: radial-gradient(circle at 10% 0%, #edf2fe 0%, transparent 50%),
+                radial-gradient(circle at 90% 15%, #fdf2f8 0%, transparent 45%),
+                linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* 3. Cyber Matrix (Neon / Emerald & Cyan) */
+.theme-cyber-neon {
+    --bg-primary: #040812;
+    --bg-surface: rgba(8, 16, 32, 0.9);
+    --bg-card: rgba(6, 12, 25, 0.94);
+    --border-color: rgba(6, 182, 212, 0.25);
+    --brand-600: #06b6d4;
+    --brand-700: #0891b2;
+    --text-primary: #e0f2fe;
+    --text-secondary: #7dd3fc;
+    --shadow-glow: 0 0 28px rgba(6, 182, 212, 0.35);
+    background: radial-gradient(circle at 20% 0%, rgba(6, 182, 212, 0.18) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),
+                linear-gradient(180deg, #020617 0%, #050d1a 100%);
+}
+
+/* 4. Crimson Sunset (Rose / Amber) */
+.theme-crimson-sunset {
+    --bg-primary: #120914;
+    --bg-surface: rgba(32, 16, 36, 0.88);
+    --bg-card: rgba(26, 12, 30, 0.92);
+    --border-color: rgba(244, 63, 94, 0.2);
+    --brand-600: #f43f5e;
+    --brand-700: #e11d48;
+    --text-primary: #fff1f2;
+    --text-secondary: #fda4af;
+    --shadow-glow: 0 0 28px rgba(244, 63, 94, 0.35);
+    background: radial-gradient(circle at 15% 0%, rgba(244, 63, 94, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 85% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 45%),
+                linear-gradient(180deg, #0c050d 0%, #170919 100%);
+}
+
+/* Base App Layout */
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* ==========================================================================
+   NAVIGATION BAR & TABS
+   ========================================================================== */
+
+.app-navbar {
+    background: var(--bg-surface);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    padding-top: 12px;
+    padding-bottom: 12px;
+    z-index: 100;
+}
+
+.brand-icon {
+    font-size: 24px;
+    filter: drop-shadow(0 0 8px var(--brand-600));
+}
+
+.brand-text {
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+.nav-tabs-wrapper {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 3px;
+}
+
+.light-theme .nav-tabs-wrapper {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-tab-link {
+    background: transparent;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-tab-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-tab-link.active {
+    background: var(--brand-600);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+.btn-nav-control {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.light-theme .btn-nav-control {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.btn-nav-control:hover {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--text-primary);
+    transform: translateY(-1px);
+}
+
+.btn-nav-control.sound-active {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+/* Mobile Nav Bar */
+.mobile-nav-bar {
+    background: var(--bg-surface);
+    border-color: var(--border-color) !important;
+}
+
+.mobile-tab-btn {
+    background: transparent;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 6px 10px;
+    border-radius: 8px;
+}
+
+.mobile-tab-btn.active {
+    background: var(--brand-600);
+    color: #fff;
+}
+
+/* ==========================================================================
+   HERO DASHBOARD HEADER
+   ========================================================================== */
+
+.dashboard-header {
+    padding: 38px 20px 16px;
+}
+
+.hero-badge {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--brand-600);
+    border: 1px solid var(--border-color);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.dashboard-header h1 {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 8px 0;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--brand-600) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.dashboard-header p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   SHARED CARD STYLING & GLASSMORPHISM
+   ========================================================================== */
+
+.dashboard-card,
+.digital-card,
+.world-card,
+.time-converter-card,
+.alarm-card,
+.timer-stopwatch-card,
+.filter-bar-card,
+.add-zone-form {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dashboard-card:hover,
+.digital-card:hover {
+    border-color: rgba(99, 102, 241, 0.35);
+}
+
+.section-title {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+}
+
+.text-primary-themed {
+    color: var(--brand-600) !important;
+}
+
+/* ==========================================================================
+   DIGITAL CLOCK COMPONENT
+   ========================================================================== */
+
+.digital-card-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--brand-600);
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseGlow 1.8s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.6; }
+}
+
+.btn-icon-tool {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+}
+
+.light-theme .btn-icon-tool {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.btn-icon-tool:hover,
+.btn-icon-tool.active {
+    color: var(--brand-600);
+    border-color: var(--brand-600);
+}
+
+.digital-readout-box {
+    margin: 12px 0;
+}
+
+.digital-time-display {
+    font-family: 'JetBrains Mono', 'Outfit', monospace;
+    font-size: 58px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--brand-600);
+    text-shadow: 0 0 24px rgba(99, 102, 241, 0.25);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+}
+
+.digits-ms {
+    font-size: 26px;
+    opacity: 0.75;
+    font-weight: 600;
+}
+
+.digital-date-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+/* Solar Tracker Bar */
+.solar-tracker-bar {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+}
+
+.light-theme .solar-tracker-bar {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.solar-progress-track {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 4px;
+}
+
+.solar-progress-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: background 0.5s ease;
+}
+
+.zone-telemetry-banner {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 10px 16px;
+}
+
+.diff-pill {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(99, 102, 241, 0.14);
+    color: var(--brand-600);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.diff-pill.diff-local {
+    background: rgba(16, 185, 129, 0.14);
+    color: #10b981;
+    border-color: rgba(16, 185, 129, 0.25);
+}
+
+/* Timezone Select Shared Form Control */
+.tz-select,
+.form-select,
+.form-control {
+    background-color: var(--bg-surface) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    border-radius: var(--radius-md);
+    padding: 9px 14px;
+    font-size: 14px;
+}
+
+.tz-select:focus,
+.form-select:focus,
+.form-control:focus {
+    border-color: var(--brand-600) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+}
+
+.tz-select option,
+.tz-select optgroup {
+    background-color: #0f172a;
+    color: #f8fafc;
+}
+
+.light-theme .tz-select option,
+.light-theme .tz-select optgroup {
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+.format-toggle-btn {
+    background: linear-gradient(135deg, var(--brand-600), var(--brand-700)) !important;
+    border: none !important;
+    border-radius: var(--radius-md) !important;
+    font-weight: 700;
+    padding: 10px;
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+}
+
+/* ==========================================================================
+   ZEN FULLSCREEN OVERLAY
+   ========================================================================== */
+
+.zen-clock-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 7, 18, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.25s ease;
+}
+
+.zen-clock-content {
+    text-align: center;
+    color: #ffffff;
+    position: relative;
+    padding: 40px;
+}
+
+.zen-close-btn {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-radius: 999px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.zen-city-badge {
+    font-size: 22px;
+    font-weight: 700;
+    color: #a5b4fc;
+    margin-bottom: 12px;
+}
+
+.zen-time-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 96px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-shadow: 0 0 40px rgba(99, 102, 241, 0.6);
+}
+
+.zen-ms {
+    font-size: 40px;
+    opacity: 0.7;
+}
+
+.zen-date-display {
+    font-size: 26px;
+    color: #94a3b8;
+    margin-top: 14px;
+}
+
+.zen-hint {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #64748b;
+}
+
+/* ==========================================================================
+   WORLD CLOCK GRID & CARDS
+   ========================================================================== */
+
+.world-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.world-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5);
+}
+
+.world-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 34px;
+    font-weight: 800;
+    color: var(--brand-600);
+    letter-spacing: -0.01em;
+}
+
+.world-date {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.diff-pill-sm {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+/* Mini Analog Clock inside World Card */
+.mini-analog-container {
+    width: 60px;
+    height: 60px;
+    margin: 8px auto;
+}
+
+.mini-analog-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.mini-clock-face {
+    fill: rgba(0, 0, 0, 0.2);
+    stroke: var(--brand-600);
+    stroke-width: 2.5;
+}
+
+.mini-hand-hour {
+    stroke: var(--text-primary);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+}
+
+.mini-hand-min {
+    stroke: var(--brand-600);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.mini-hand-sec {
+    stroke: #f43f5e;
+    stroke-width: 1.2;
+}
+
+.mini-clock-center {
+    fill: #f43f5e;
+}
+
+.btn-remove-zone {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+}
+
+/* ==========================================================================
+   TIME CONVERTER / MEETING PLANNER
+   ========================================================================== */
+
+.scrubber-control-panel {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+}
+
+.light-theme .scrubber-control-panel {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.custom-time-slider {
+    height: 8px;
+    accent-color: var(--brand-600);
+    cursor: pointer;
+}
+
+.btn-quick-jump {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+}
+
+.light-theme .btn-quick-jump {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.btn-quick-jump:hover {
+    background: var(--brand-600);
+    color: #fff;
+}
+
+.converter-zone-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+.converter-zone-card.is-anchor {
+    border-color: var(--brand-600);
+    box-shadow: 0 0 16px rgba(99, 102, 241, 0.25);
+}
+
+.converter-time-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--brand-600);
+}
+
+/* ==========================================================================
+   ALARM MANAGER & ACTIVE RINGING MODAL
+   ========================================================================== */
+
+.add-alarm-box {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+}
+
+.light-theme .add-alarm-box {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.btn-repeat-pill {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+}
+
+.btn-repeat-pill.active {
+    background: var(--brand-600);
+    color: #ffffff;
+}
+
+.alarm-item-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.alarm-disabled {
+    opacity: 0.55;
+}
+
+.alarm-time-large {
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Ringing Alarm Modal Alert */
+.alarm-ringing-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s ease;
+}
+
+.alarm-ringing-modal {
+    background: #0f172a;
+    color: #ffffff;
+    border: 2px solid #ef4444;
+    border-radius: 28px;
+    max-width: 440px;
+    width: 90%;
+    box-shadow: 0 0 50px rgba(239, 68, 68, 0.5);
+    animation: bounceIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.alarm-bell-animation {
+    font-size: 54px;
+    display: inline-block;
+    animation: ringWobble 0.6s infinite ease-in-out;
+}
+
+@keyframes ringWobble {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(18deg); }
+    50% { transform: rotate(-18deg); }
+    75% { transform: rotate(12deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   STOPWATCH & COUNTDOWN TIMER
+   ========================================================================== */
+
+.tool-tab-pill {
+    display: inline-flex;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 3px;
+}
+
+.btn-tab {
+    background: transparent;
+    border: none;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.btn-tab.active {
+    background: var(--brand-600);
+    color: #fff;
+}
+
+.stopwatch-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 64px;
+    font-weight: 800;
+    color: var(--brand-600);
+    font-variant-numeric: tabular-nums;
+}
+
+.sw-ms {
+    font-size: 32px;
+    opacity: 0.7;
+}
+
+.timer-gauge-wrapper {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timer-gauge-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.timer-gauge-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 10;
+}
+
+.timer-gauge-progress {
+    fill: none;
+    stroke: var(--brand-600);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s linear;
+}
+
+.timer-gauge-content {
+    position: absolute;
+    text-align: center;
+}
+
+.timer-digits {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-primary);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.dashboard-footer {
+    margin-top: auto;
+    padding: 26px 20px;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.footer-subtext {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   RESPONSIVE ADJUSTMENTS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 30px;
+    }
+    .digital-time-display {
+        font-size: 42px;
+    }
+    .stopwatch-display {
+        font-size: 46px;
+    }
+    .world-time {
+        font-size: 28px;
+    }
+}

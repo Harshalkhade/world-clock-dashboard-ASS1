@@ -1,0 +1,18 @@
+# Development image: runs the Vite dev server with hot module reload.
+# Source code is mounted as a volume (see docker-compose.yml) so edits
+# on your host machine are picked up instantly inside the container.
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+RUN npm ci
+
+COPY . .
+
+EXPOSE 5173
+
+# --host is required so Vite's dev server is reachable from outside
+# the container (default binds to 127.0.0.1 which Docker can't expose)
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

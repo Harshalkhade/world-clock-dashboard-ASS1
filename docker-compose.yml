@@ -1,0 +1,25 @@
+services:
+
+  # Production: builds the optimized bundle and serves it via nginx.
+  # Run with:  docker compose up web
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+  # Development: Vite dev server with hot reload, source mounted live.
+  # Run with:  docker compose up dev
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
